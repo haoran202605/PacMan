@@ -111,7 +111,6 @@ const MAP = [
 /* ============ GAME STATE ============ */
 let game = {};
 let animationId = null;
-const KEY = {};
 
 /* ============ GAME CLASSES ============ */
 function createGame() {
@@ -222,11 +221,6 @@ function canMove(px, py, dx, dy, isGhost) {
 /* ============ PACMAN ============ */
 function updatePacman(g) {
   const p = g.pacman;
-  // Handle input
-  if (KEY['ArrowLeft'])  p.nextDir = {x:-1, y:0};
-  if (KEY['ArrowRight']) p.nextDir = {x:1, y:0};
-  if (KEY['ArrowUp'])    p.nextDir = {x:0, y:-1};
-  if (KEY['ArrowDown'])  p.nextDir = {x:0, y:1};
 
   p.moveCounter++;
   if (p.moveCounter < p.moveInterval) return;
@@ -756,16 +750,19 @@ function gameLoop() {
 
 /* ============ KEYBOARD ============ */
 document.addEventListener('keydown', e => {
-  KEY[e.key] = true;
-  e.preventDefault();
+  const dirMap = {
+    'ArrowLeft':  {x:-1, y:0},
+    'ArrowRight': {x:1, y:0},
+    'ArrowUp':    {x:0, y:-1},
+    'ArrowDown':  {x:0, y:1}
+  };
+  if (dirMap[e.key]) {
+    game.pacman.nextDir = dirMap[e.key];
+    e.preventDefault();
+  }
 });
 
 document.addEventListener('keyup', e => {
-  KEY[e.key] = false;
-});
-
-// Prevent scrolling with arrows
-window.addEventListener('keydown', e => {
   if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
     e.preventDefault();
   }
