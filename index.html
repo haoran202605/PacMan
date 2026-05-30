@@ -3,34 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pac-Man Game</title>
+    <title>Pac-Man</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
             overflow: hidden;
-            background-color: black;
+        }
+        #gameContainer {
+            position: relative;
         }
         canvas {
             display: block;
-            margin: auto;
+            margin: 0 auto;
+            background: #000;
         }
+        #overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.75);
+            color: #fff;
+            font-size: 28px;
+            z-index: 10;
+        }
+        #overlay.hidden { display: none; }
+        #overlay p { margin: 10px 0; }
+        #overlay .title {
+            font-size: 48px;
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+        }
+        #overlay .info { font-size: 18px; color: #aaa; margin-top: 20px; }
+        #overlay .btn {
+            padding: 12px 40px;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.1s;
+        }
+        #overlay .btn:hover { transform: scale(1.05); }
+        #overlay .final-score { font-size: 36px; color: #FFD700; margin: 10px 0; }
     </style>
 </head>
 <body>
+<div id="gameContainer">
     <canvas id="gameCanvas"></canvas>
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 800;
-        canvas.height = 600;
-
-        // Main game loop
-        function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            requestAnimationFrame(gameLoop);
-        }
-
-        gameLoop();
-    </script>
+    <div id="overlay">
+        <div class="title">PAC-MAN</div>
+        <p>Press SPACE to start</p>
+        <p class="info">Arrow keys to move</p>
+        <button class="btn" id="startBtn">START</button>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
