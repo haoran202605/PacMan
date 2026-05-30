@@ -53,7 +53,7 @@ const CHASE_DURATION = 480;
 const GHOST_SPEED_NORMAL = 0.8;
 const GHOST_SPEED_FRIGHT = 0.5;
 const GHOST_SPEED_TUNNEL = 0.4;
-const PAC_SPEED = 1;
+const PAC_SPEED = 0.6;
 const FRAME_INTERVAL = 16; // ~60fps
 
 /* ---- State ---- */
