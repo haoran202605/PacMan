@@ -1,0 +1,8 @@
+/* Style for Pac-Man Game */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+}
+#gameCanvas {
+    border: 1px solid white;
+}
